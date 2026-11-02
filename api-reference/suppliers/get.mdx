@@ -1,0 +1,70 @@
+---
+title: "Get supplier"
+description: "Returns one of your suppliers."
+api: "GET /v1/suppliers/{supplierId}"
+tag: "Silver"
+---
+
+Returns `404` if the supplier does not belong to your company.
+
+<ParamField path="supplierId" type="string" required>
+  Supplier UUID from [List suppliers](/api-reference/suppliers/list).
+</ParamField>
+
+<ResponseField name="id" type="string" required>
+  Supplier UUID.
+</ResponseField>
+
+<ResponseField name="companyName" type="string" required>
+  Supplier company name.
+</ResponseField>
+
+<ResponseField name="contactName" type="string | null">
+  Main contact at the supplier.
+</ResponseField>
+
+<ResponseField name="email" type="string | null">
+  Contact email.
+</ResponseField>
+
+<ResponseField name="phone" type="string | null">
+  Contact phone number.
+</ResponseField>
+
+<ResponseField name="industry" type="string | null">
+  Supplier industry.
+</ResponseField>
+
+<ResponseField name="addedAt" type="string" required>
+  When you added the supplier.
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl https://api.nczgroup.com/v1/suppliers/9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34 \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "id": "9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34",
+  "companyName": "Surelock Homes",
+  "contactName": "Jo Bloggs",
+  "email": "jo@surelockhomes.example",
+  "phone": "+44 161 496 0000",
+  "industry": "Construction",
+  "addedAt": "2026-01-20T11:00:00.000Z"
+}
+```
+
+```json 404
+{
+  "statusCode": 404,
+  "timestamp": "2026-11-12T10:00:00.000Z",
+  "path": "/v1/suppliers/9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34",
+  "message": "Supplier not found."
+}
+```
+</ResponseExample>

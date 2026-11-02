@@ -1,0 +1,65 @@
+---
+title: "Get company"
+description: "Returns the company that owns the API key."
+api: "GET /v1/company"
+tag: "Silver"
+---
+
+<ResponseField name="id" type="string" required>
+  Company UUID.
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  Company name.
+</ResponseField>
+
+<ResponseField name="registrationNumber" type="string | null">
+  Company registration number.
+</ResponseField>
+
+<ResponseField name="email" type="string | null">
+  Main contact email.
+</ResponseField>
+
+<ResponseField name="phone" type="string | null">
+  Main contact phone number.
+</ResponseField>
+
+<ResponseField name="address" type="string | null">
+  Postal address.
+</ResponseField>
+
+<ResponseField name="website" type="string | null">
+  Website URL.
+</ResponseField>
+
+<ResponseField name="currency" type="string | null">
+  ISO 4217 currency code.
+</ResponseField>
+
+<ResponseField name="createdAt" type="string" required>
+  When the company joined NCZ.
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl https://api.nczgroup.com/v1/company \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "id": "3f6c2a1e-8b4d-4c9a-9e2f-1a7b5c3d9e01",
+  "name": "Monkey Business Inc.",
+  "registrationNumber": "09876543",
+  "email": "sustainability@monkeybusiness.example",
+  "phone": "+44 20 7946 0000",
+  "address": "1 Banana Wharf, London",
+  "website": "https://monkeybusiness.example",
+  "currency": "GBP",
+  "createdAt": "2025-03-14T09:30:00.000Z"
+}
+```
+</ResponseExample>

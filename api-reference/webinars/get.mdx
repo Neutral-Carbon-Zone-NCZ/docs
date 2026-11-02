@@ -1,0 +1,49 @@
+---
+title: "Get webinar"
+description: "Returns one of your webinars."
+api: "GET /v1/webinars/{webinarId}"
+tag: "Platinum"
+---
+
+Returns `404` if the webinar does not belong to your company.
+
+<ParamField path="webinarId" type="string" required>
+  Webinar UUID from [List webinars](/api-reference/webinars/list).
+</ParamField>
+
+<ResponseField name="id" type="string" required>Webinar UUID.</ResponseField>
+<ResponseField name="title" type="string" required>Webinar title.</ResponseField>
+<ResponseField name="description" type="string | null">Webinar description.</ResponseField>
+<ResponseField name="timezone" type="string | null">IANA timezone the sessions are scheduled in.</ResponseField>
+<ResponseField name="active" type="boolean" required>`true` if the webinar is open for registration.</ResponseField>
+<ResponseField name="firstSessionAt" type="string | null">Start of the earliest session.</ResponseField>
+<ResponseField name="lastSessionAt" type="string | null">Start of the latest session.</ResponseField>
+<ResponseField name="sessionCount" type="integer" required>Number of sessions.</ResponseField>
+<ResponseField name="registeredCount" type="integer" required>Number of registrations.</ResponseField>
+<ResponseField name="attendedCount" type="integer" required>Number of registrants who attended.</ResponseField>
+<ResponseField name="feedbackSubmittedCount" type="integer" required>Number of registrants who submitted the feedback form.</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl https://api.nczgroup.com/v1/webinars/7c2e9a14-5d3b-4f8e-a1c6-2b9d4e7f0a58 \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "id": "7c2e9a14-5d3b-4f8e-a1c6-2b9d4e7f0a58",
+  "title": "Net zero for suppliers",
+  "description": "How to measure and report your emissions.",
+  "timezone": "Europe/London",
+  "active": true,
+  "firstSessionAt": "2026-10-07T10:00:00.000Z",
+  "lastSessionAt": "2026-10-21T10:00:00.000Z",
+  "sessionCount": 3,
+  "registeredCount": 24,
+  "attendedCount": 18,
+  "feedbackSubmittedCount": 11
+}
+```
+</ResponseExample>

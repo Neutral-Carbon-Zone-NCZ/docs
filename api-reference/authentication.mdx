@@ -1,0 +1,26 @@
+---
+title: "Authentication"
+description: "Authenticate requests with your company API key."
+icon: "key"
+---
+
+Every request needs your company API key in the `x-api-key` header.
+
+```bash
+curl https://api.nczgroup.com/v1/company \
+  -H "x-api-key: YOUR_API_KEY"
+```
+
+## Get a key
+
+Ask your NCZ account manager for a key. Each key belongs to one company and is shown once, when it is created.
+
+<Warning>
+  Store the key in a secret manager. Never put it in client-side code or commit it to a repository.
+</Warning>
+
+If a key leaks, ask NCZ to revoke it. A revoked key stops working immediately and returns `401`.
+
+## Rate limits
+
+Each key can make 60 requests per minute across all endpoints. Requests over the limit return `429`. Wait for the minute window to reset before you retry.

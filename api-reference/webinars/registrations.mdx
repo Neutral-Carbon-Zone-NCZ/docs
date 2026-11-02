@@ -1,0 +1,56 @@
+---
+title: "List webinar registrations"
+sidebarTitle: "List registrations"
+description: "Returns who registered for a webinar, who attended and who gave feedback."
+api: "GET /v1/webinars/{webinarId}/registrations"
+tag: "Platinum"
+---
+
+Returns `404` if the webinar does not belong to your company.
+
+<ParamField path="webinarId" type="string" required>
+  Webinar UUID from [List webinars](/api-reference/webinars/list).
+</ParamField>
+
+<ResponseField name="data" type="object[]" required>
+  <Expandable title="properties">
+    <ResponseField name="id" type="string">Registration UUID.</ResponseField>
+    <ResponseField name="supplierId" type="string | null">The matching supplier in your supplier list, or `null` if the registrant is not one of your suppliers.</ResponseField>
+    <ResponseField name="businessName" type="string | null">Registrant's business name.</ResponseField>
+    <ResponseField name="contactEmail" type="string | null">Registrant's email.</ResponseField>
+    <ResponseField name="sessionAt" type="string | null">Start of the session they booked.</ResponseField>
+    <ResponseField name="durationMinutes" type="integer | null">Session length in minutes.</ResponseField>
+    <ResponseField name="registeredAt" type="string">When they registered.</ResponseField>
+    <ResponseField name="attended" type="boolean">`true` if they attended.</ResponseField>
+    <ResponseField name="feedbackSubmitted" type="boolean">`true` once they submit the feedback form from their feedback email link.</ResponseField>
+    <ResponseField name="feedbackSubmittedAt" type="string | null">When they submitted feedback.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl https://api.nczgroup.com/v1/webinars/7c2e9a14-5d3b-4f8e-a1c6-2b9d4e7f0a58/registrations \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "data": [
+    {
+      "id": "e1f3a5c7-9b2d-4e6f-8a0c-3d5b7f9e1a24",
+      "supplierId": "d4a8f2c6-1b3e-4f7a-9c5d-8e2b6a4f1c90",
+      "businessName": "Pest in Peace",
+      "contactEmail": "sam@pestinpeace.example",
+      "sessionAt": "2026-10-07T10:00:00.000Z",
+      "durationMinutes": 60,
+      "registeredAt": "2026-09-30T14:12:00.000Z",
+      "attended": true,
+      "feedbackSubmitted": true,
+      "feedbackSubmittedAt": "2026-10-08T09:05:00.000Z"
+    }
+  ]
+}
+```
+</ResponseExample>

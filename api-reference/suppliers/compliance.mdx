@@ -1,0 +1,67 @@
+---
+title: "Get supplier certification"
+sidebarTitle: "Get certification"
+description: "Returns a supplier's NCZ certification status."
+api: "GET /v1/suppliers/{supplierId}/compliance"
+tag: "Gold"
+---
+
+Returns `404` if the supplier does not belong to your company.
+
+<ParamField path="supplierId" type="string" required>
+  Supplier UUID from [List suppliers](/api-reference/suppliers/list).
+</ParamField>
+
+<ResponseField name="supplierId" type="string" required>
+  Supplier UUID.
+</ResponseField>
+
+<ResponseField name="status" type="string" required>
+  `certified` if the certification is in date, `expired` if it has lapsed, `not_certified` if the supplier has none.
+</ResponseField>
+
+<ResponseField name="certification" type="object | null">
+  The supplier's linked certification. `null` when `status` is `not_certified`.
+  <Expandable title="properties">
+    <ResponseField name="programme" type="string">Certification programme name.</ResponseField>
+    <ResponseField name="level" type="string">One of `blue`, `silver`, `gold` or `platinum`.</ResponseField>
+    <ResponseField name="year" type="integer">Certification year.</ResponseField>
+    <ResponseField name="referenceNumber" type="string">Certificate reference number.</ResponseField>
+    <ResponseField name="validFrom" type="string">Start of the validity period.</ResponseField>
+    <ResponseField name="validTo" type="string">End of the validity period.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="expectedLevel" type="string | null">
+  The certification level you expect this supplier to hold.
+</ResponseField>
+
+<ResponseField name="missingInformation" type="boolean" required>
+  `true` if the supplier record is flagged as missing information.
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl https://api.nczgroup.com/v1/suppliers/9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34/compliance \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "supplierId": "9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34",
+  "status": "certified",
+  "certification": {
+    "programme": "Gold Award",
+    "level": "gold",
+    "year": 2026,
+    "referenceNumber": "SLH-2026-014",
+    "validFrom": "2026-02-01T00:00:00.000Z",
+    "validTo": "2027-01-31T00:00:00.000Z"
+  },
+  "expectedLevel": "Gold",
+  "missingInformation": false
+}
+```
+</ResponseExample>

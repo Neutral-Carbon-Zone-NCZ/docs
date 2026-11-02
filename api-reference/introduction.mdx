@@ -1,0 +1,42 @@
+---
+title: "Customer API"
+sidebarTitle: "Introduction"
+description: "Read-only REST API for your NCZ company, suppliers, certifications and webinars."
+icon: "book-open"
+---
+
+The Customer API gives your systems read-only access to the data in your NCZ account. It returns JSON over HTTPS.
+
+## Base URL
+
+```
+https://api.nczgroup.com/v1
+```
+
+## Plan access
+
+What you can call depends on your NCZ plan. Each endpoint page shows the plan it needs.
+
+| Plan | Endpoints |
+| --- | --- |
+| Silver | [Company](/api-reference/company/get), [suppliers](/api-reference/suppliers/list) |
+| Gold | Silver endpoints plus [supplier certification status](/api-reference/suppliers/compliance) |
+| Platinum | Gold endpoints plus [webinars](/api-reference/webinars/list) and [registrations](/api-reference/webinars/registrations) |
+
+Calling an endpoint your plan does not include returns `403`.
+
+## Conventions
+
+- All IDs are UUIDs.
+- Timestamps are ISO 8601 in UTC, for example `2026-10-07T10:00:00.000Z`.
+- List endpoints wrap results in a `data` array.
+- You only ever see your own company's data. IDs that belong to another company return `404`.
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Send your API key and stay within the rate limit.
+  </Card>
+  <Card title="Errors" icon="triangle-alert" href="/api-reference/errors">
+    Status codes and the error response shape.
+  </Card>
+</CardGroup>

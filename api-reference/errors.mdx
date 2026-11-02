@@ -1,0 +1,24 @@
+---
+title: "Errors"
+description: "Status codes the Customer API returns and the error response shape."
+icon: "triangle-alert"
+---
+
+| Status | Meaning |
+| --- | --- |
+| `400` | A parameter is invalid, for example a malformed UUID or a `limit` above 200. |
+| `401` | The API key is missing, unknown or revoked. |
+| `403` | Your plan does not include this endpoint. |
+| `404` | The resource does not exist or does not belong to your company. |
+| `429` | You exceeded the [rate limit](/api-reference/authentication#rate-limits). |
+
+Every error response has the same shape:
+
+```json
+{
+  "statusCode": 404,
+  "timestamp": "2026-11-12T10:00:00.000Z",
+  "path": "/v1/suppliers/9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34",
+  "message": "Supplier not found."
+}
+```

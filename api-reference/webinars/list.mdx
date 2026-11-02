@@ -1,0 +1,39 @@
+---
+title: "List webinars"
+description: "Returns your webinars with registration, attendance and feedback counts."
+api: "GET /v1/webinars"
+tag: "Platinum"
+---
+
+<ResponseField name="data" type="object[]" required>
+  Webinars. Each item has the same shape as [Get webinar](/api-reference/webinars/get).
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl https://api.nczgroup.com/v1/webinars \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "data": [
+    {
+      "id": "7c2e9a14-5d3b-4f8e-a1c6-2b9d4e7f0a58",
+      "title": "Net zero for suppliers",
+      "description": "How to measure and report your emissions.",
+      "timezone": "Europe/London",
+      "active": true,
+      "firstSessionAt": "2026-10-07T10:00:00.000Z",
+      "lastSessionAt": "2026-10-21T10:00:00.000Z",
+      "sessionCount": 3,
+      "registeredCount": 24,
+      "attendedCount": 18,
+      "feedbackSubmittedCount": 11
+    }
+  ]
+}
+```
+</ResponseExample>

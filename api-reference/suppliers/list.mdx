@@ -1,0 +1,63 @@
+---
+title: "List suppliers"
+description: "Returns your active suppliers, newest first."
+api: "GET /v1/suppliers"
+tag: "Silver"
+---
+
+To read every supplier, increase `offset` by `limit` until `offset` reaches `pagination.total`.
+
+<ParamField query="limit" type="integer" default="50">
+  Number of suppliers to return, from 1 to 200.
+</ParamField>
+
+<ParamField query="offset" type="integer" default="0">
+  Number of suppliers to skip.
+</ParamField>
+
+<ResponseField name="data" type="object[]" required>
+  Suppliers. Each item has the same shape as [Get supplier](/api-reference/suppliers/get).
+</ResponseField>
+
+<ResponseField name="pagination" type="object" required>
+  <Expandable title="properties">
+    <ResponseField name="total" type="integer">Total suppliers across all pages.</ResponseField>
+    <ResponseField name="limit" type="integer">Limit applied to this page.</ResponseField>
+    <ResponseField name="offset" type="integer">Offset applied to this page.</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```bash cURL
+curl "https://api.nczgroup.com/v1/suppliers?limit=2&offset=0" \
+  -H "x-api-key: YOUR_API_KEY"
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "data": [
+    {
+      "id": "9b1e4c77-2f0a-4d6e-8a3b-5c9d0e1f2a34",
+      "companyName": "Surelock Homes",
+      "contactName": "Jo Bloggs",
+      "email": "jo@surelockhomes.example",
+      "phone": "+44 161 496 0000",
+      "industry": "Construction",
+      "addedAt": "2026-01-20T11:00:00.000Z"
+    },
+    {
+      "id": "d4a8f2c6-1b3e-4f7a-9c5d-8e2b6a4f1c90",
+      "companyName": "Pest in Peace",
+      "contactName": "Sam Smith",
+      "email": "sam@pestinpeace.example",
+      "phone": "+44 113 496 0000",
+      "industry": "Facilities",
+      "addedAt": "2026-01-12T08:45:00.000Z"
+    }
+  ],
+  "pagination": { "total": 37, "limit": 2, "offset": 0 }
+}
+```
+</ResponseExample>
