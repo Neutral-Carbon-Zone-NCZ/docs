@@ -8,6 +8,11 @@
     "dark": "#15803D"
   },
   "favicon": "/favicon.svg",
+  "banner": {
+    "content": "**⚠️ Heads up:** Our API is currently in active development. Endpoints may change.",
+    "type": "warning",
+    "dismissible": true
+  },
   "navigation": {
     "tabs": [
       {
@@ -15,10 +20,7 @@
         "pages": [
           {
             "group": "Get started",
-            "pages": [
-              "index",
-              "quickstart"
-            ]
+            "pages": ["index", "quickstart"]
           }
         ]
       },
@@ -35,9 +37,7 @@
           },
           {
             "group": "Company",
-            "pages": [
-              "api-reference/company/get"
-            ]
+            "pages": ["api-reference/company/get"]
           },
           {
             "group": "Suppliers",
@@ -101,11 +101,7 @@
       "display": "interactive"
     },
     "examples": {
-      "languages": [
-        "bash",
-        "javascript",
-        "python"
-      ]
+      "languages": ["bash", "javascript", "python"]
     },
     "mdx": {
       "auth": {
